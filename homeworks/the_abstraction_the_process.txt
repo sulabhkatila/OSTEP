@@ -1,0 +1,16 @@
+1 -> The CPU utilization should be 100% because the CPU is running 2 process with 5 instructions, each of which with 100% chance of CPU usage.
+
+2 -> It would take 11 clock ticks to run the 2 processes- 4 for the first and, after its completion, 2+5 for the second.
+
+3 -> Yes, switching the order would, absolutely, matter because the one process is entirely CPU bound and the other is the opposite. Running the CPU bound process frirst means the second processes will wait till the process 1 completion for it to initiate its IO request, but if the IO bound process first the CPU will get to attend to the other process while the IO bound process is waiting.
+
+4 -> The CPU will stay idle instead of switching to the other process.
+
+5 -> The CPU will move to another process when the current process is waiting for IO.
+
+6 -> The CPU will move to completely new process when the currect process is waiting for IO or is completed. It doesn't seem like a very good utilization of the resources given the CPY utilization was 67 percent and IO was Busy less than 50 percent of the time. The underutilization is seen primarily because the first process makes multipe different io requests and we are moving to a new process the very first time and not coming back to it till we have cycled through all other process , which are entirely CPU bound.
+
+7 -> This time the CPU utilization is 100% because of how CPU is coming back to the first process after completing the second process, thrid process and so on. This fixes the issue we had in the previous one where we would be left, in the end, with a process that still has many IO requests to make.
+
+8 -> I have no idea what kind of randomness to expect from the -s argument, however I am predicting it does not matter what -I option we pick-- its two process with same process count and same chance for IO operation. It definetely would matter what -S option we pick because we wouldn't want to be idle and wait for the process to complete inorder to move to another process (and we clearly will have some IO waiting to do).
+
