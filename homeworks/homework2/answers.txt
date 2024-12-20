@@ -1,0 +1,9 @@
+1 -> After calling fork() both parent and child process will have their own copy of the variable. Changing the vaeiable in one process will not affect the variable in the other process.
+
+2 -> Yes, they (both processes) are able to access the file descriptor returned by open(). When both the file tries to write to the file concurrenlty, one of them will get it first and the other will have to wait for the first to finish writing. After writing, the file pointer is moved for both the processes and the other process can write to the file.
+
+3 -> Yes, there is a way to ensure that the child process always writes first without using wait. Instead of wait, we have other options like using shared memory, pipes, and signals to communicate between process for the parent to "wait" for child's message before writing to the file.
+
+4 -> All the functions are just "frontends" to eventually call execvpe. There are so many different options to help find the file that is to be execited.
+
+5 -> wait() returns the pid of the child process that completed. If there are no child processes, it returns -1.
