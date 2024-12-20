@@ -7,3 +7,5 @@
 4 -> All the functions are just "frontends" to eventually call execvpe. There are so many different options to help find the file that is to be execited.
 
 5 -> wait() returns the pid of the child process that completed. If there are no child processes, it returns -1.
+
+6 -> waitpid(), much like wait(), waits for the child process to complete. However, it provides some special options to wait for a specific child process to wait for. This can be useful when the parent has multiple children but only wants to wait for a specific child (and ignore other children).
