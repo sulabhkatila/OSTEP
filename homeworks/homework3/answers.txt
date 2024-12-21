@@ -1,0 +1,5 @@
+Time for syscall
+-> As per my experimentation, a syscall (tested for a combination of open and close) 1.81 microseconds. Also, this is not a very accurate measure.
+
+Time for context switch
+-> Could not perform any experimentation. I am on MacOS and I am not sure how to perform anything like process or thread affinity.
