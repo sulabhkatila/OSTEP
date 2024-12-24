@@ -1,0 +1,25 @@
+1 -> Done.
+
+
+2 -> 
+Last example:
+python3 mlfq.py -l 0,140,0:0,140,0 -M 0 -n 3 -A 20,40,80 -Q 10,20,40
+
+
+3 -> I'd have a single queue, have allotment times equal to the quantum time.
+
+
+4 -> python3 mlfq.py -l 0,15,2:0,10,0 -n 3 -A 3,3,3 -Q 1,1,1 --stay -i 1 -q 1
+
+
+5 -> There are X processes and one long running, possibly starving process in the system.
+
+We will have, at any given time, X + 1 processes in all the queues the queues combined. In the beginning the long running process was put in priority 1 will get allotment * 10ms after, at most, allotment * 10ms * X.
+
+After getting boosted, the setup will, at worst, have the potentially starving process at the end of the queue. This way the setup will be identical to the initial setup. 
+
+Assume X is at most 19, then the boosting would need to occur every 20 allotsof the CPU intensive process to enjoy 5% CPU time.
+
+
+6 -> It will stop the currently running process and switch to the recently IO completed process.
+
