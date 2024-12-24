@@ -1,0 +1,16 @@
+1 -> Done!
+
+
+2 -> With ticket favouring the second process so much, it is highly unlikely that the first process will ever get any chance to run when first process is runnable. 
+Such imabalance causes startvation for the unfortunate.
+
+
+3 -> The processes did not complete side by side-- the difference was any where between 4 time slices to 10. The unfairness was kept between 2% to 5% of total CPU time.
+
+
+4 -> As quantum size gets larger, the unfairness increases.
+
+
+5 -> Yes, I absolutely can! We can have Fairness on the Y-axis and Quantum length by X-axis. The fairness will start at its highest when quantum length is less than or equal to the length of timeslice. As quantim length increases and crosses timeslice length it will start dropping in a, somewhat of a, linear fashion.
+
+One other thing that could be interesting is the length of timeslice, which does not seem to have any effect in the fairness (it'll be a straight line parallel to x-axis).
