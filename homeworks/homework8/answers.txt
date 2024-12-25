@@ -1,0 +1,14 @@
+1 -> Used vm_stat command.
+
+
+2 ->
+<Used vm_stat command>
+Have no idea what I am looking at. Adding a few numbers that look relevant gives me a number that is 3 gigabytes less than what I paid for! Hopefully, I am wrong.
+
+
+3 ->
+<Used vm_stat command>
+The "free pages" stayed stable for a while with slight increase and decrease. Then, there are a noticeable increase in "free pages". It stayed stable for a while before taking a massive hit. Thn, there was a slight, but noticeable, increase. 
+
+
+4, 5, 6 ... -> I will come back to this homework after I get a linux machine.
