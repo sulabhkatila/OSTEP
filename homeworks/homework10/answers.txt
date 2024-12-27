@@ -1,0 +1,9 @@
+1 -> Done!
+
+2 -> The biggest program is of unit 929, so the limit value should be, minimally, 930.
+
+3 -> Add the total size of all 10 programs and substract the resulting value from 16k.
+
+4 -> Ok.
+
+5 -> As bounds get bigger the valid programs get smaller, and will limit at one (because programs won't be bigger than the physical memory).
