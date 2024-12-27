@@ -1,0 +1,27 @@
+<Using lldb for gdb and leaks for valgrind>
+
+1 -> Program seg faults, because of null pointer dereference.
+
+
+2 -> lldb points to the exact line where the seg fault occured and the exact dereference that caused it.
+
+
+3 -> No leaks detected.
+
+
+4 -> Shows the total memory allocated dynamically and the totla memory that was leaked.
+
+
+5 -> 816 bytes of memory leaked.
+
+
+6 -> No memory leaks!
+
+
+7 -> No, running the program provides the reson for exit. free probably checks if the pointer is pointing to heap memory or not, and exits if not.
+
+
+8 -> Realloc is generally slower than the linkedlist verison.
+
+
+9 -> Ok.
