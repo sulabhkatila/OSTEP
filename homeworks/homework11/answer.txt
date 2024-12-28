@@ -1,0 +1,29 @@
+1 -> 
+First command:
+VA 0= 108 in binary is 1101100 (8-bits), hence the segment grows negative. The offset is 101100, which in decimal is 44, and the negative offset is 44 - 64 = -20. Since the magnitude of the negative offset is equal to the segment size (condition to pass was less than or equal to), it causes a segment violation.
+
+VA 1: 97 in binary is 01100001 (8-bits), hence the segment grows positive. The offset is 1100001, which in decimal is 97. Since the offset is not less than the segment size, it causes a segment violation. 
+
+VA 2: 53 in binary is 00110101 (8-bits), hence the segment grows positive. The offset is 110101, which in decimal is 53. Since the offset is not less than the segment size, it causes a segment violation.
+
+VA 3: 33 in binary is 00100001 (8-bits), hence the segment grows positive. The offset is 100001, which in decimal is 33. Since the offset is not less than the segment size, it causes a segment violation.
+
+VA 4: 65 in binary is 01000001 (8-bits), hence the segment grows positive. The offset is 100001, which in decimal is 33. Since the offset is not less than the segment size, it causes a segment violation.
+
+
+Second and third command:
+Same theory as above.
+
+
+2 -> In segment 0, the highest legal address is 19 (physical 19). The lowest legal address in segment 1 is 108 (physical 491).
+Tested with the following command: python3 segmentation.py -a 128 -p 512 -b 0 -l 20 -B 512 -L 20 -s 0 -A 107,108,109,18,19,20 -c
+
+
+3 -> Segment 0 will have base at decimal 0 (and size of 2) and Segment 1 will have base at decimal 16 (and size of 2).
+
+
+4 -> The base and segment size (relative to the total physical memory) are important. Configuration should ensure that the two segments, combined, are big enough to cover 90% of the total physical memory.
+
+
+5 -> Yes, by making sure that the size of both the segments is 0.
+
