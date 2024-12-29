@@ -1,0 +1,35 @@
+1 -> 
+ptr[0] = 1000
+List = [ addr:1003 size:997 ]
+
+Free(ptr[0]) = returned 0
+List = [ addr:1000 size:3, addr:1003 size:997 ]
+
+
+pts[1] = 1003
+List = [ addr:1000 size:3, addr:1008 size:992 ]
+
+Free(ptr[0]) = returned 0
+List = [ addr:1000 size:3, addr:1003 size:5, addr:1008 size:992 ]
+
+...
+
+I notice that, in this scenario (with no coalescion), if the allocations keep growing in size everytime it will create fragmentation.
+
+
+2 -> This, I noticed, to be worse than the previous one as it is going to break the bigger chunk even if there is a fitting chunk already in the free list. 
+
+
+3 -> There still is internal fragmentation to be noticed here, but the chucks are much smaller. The average search time is also faster compared to the other two algorithms.
+
+
+4 -> It will affect the first fit method.
+
+
+5 -> When not coalescing, the number of "fragmented" chucks increase overtime with the increase in allocation requests. When coalescing, it is dealt with by combining the chucks to a bigger free chunk which is more likely to be able to service the upcoming request.
+The ordering of the list would not matter for coalescing.
+
+
+6 -> For worst fit, I shall make smallest size (1) reuqests.
+For best fit, I shall start small and keep it the size growing by the smallest margin possible (1).
+For first fit, I shall shall do the same as the best fit.
