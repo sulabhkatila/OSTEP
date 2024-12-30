@@ -1,0 +1,12 @@
+1 -> Increase in address space means there is an increase in pages to keep track of resulting in larger page-table size.
+As the page size grows, the number of pages decreses, which means the page table size decreases.
+Not use big pages in general because it can lead to internal fragmentation.
+
+
+2 -> As we increase the percentage of pages that are allocated in each address space, the page table size increases and so does the number of valid memory accesses.
+
+
+3 -> Having 256m address space, and 1m of page size while having just 512m physical memory is unrealistic because a huge portion of the addresses will be invalid.
+
+
+4 -> The program will refuse to run "Error: physical memory size must be GREATER than address space size (for this simulation)".
