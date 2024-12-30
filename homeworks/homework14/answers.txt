@@ -1,0 +1,19 @@
+1 -> gettimeofday() measures in microseconds. An operation has to take at least 1 microsecond to be measured individually.
+
+
+2 -> Done!
+
+
+3 -> Tried in in a single machine (Mac). The access time, interestingly, seem to decrease as number of pages increase.
+
+
+4 -> Used Matplitlib and numpy. Visualization helps see the trends and outliers.
+
+
+5 -> Use -O0 flag. Updated the data and graph.
+
+
+6 -> Can't seem to do it in mac.
+
+
+7 -> Initialized to 0. Updated the code, data, and graph.
