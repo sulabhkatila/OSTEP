@@ -1,0 +1,30 @@
+1 -> In a 2 level page table, we'd need a single register to keep track of the page directory base address. This register would be used to find the page directory in memory. The page directory would contain the base addresses of the page tables. The page tables would contain the base addresses of the pages. The page tables would be indexed by the virtual page number, and the pages would be indexed by the page number. The page number would be used to find the physical page in memory. The physical page would contain the data.
+Similiarly, we'd need a single register to keep track of the page table base address in a 3 level page table.
+
+
+2 -> 
+Address: 0x611c
+Address in Binary: 0110 0001 0001 1100
+Page directory index: 11000 = 24
+Page table index: 01000 = 8
+Offset: 11100 = 28
+
+Value at 24th index in page directory (page 108): 0xa1
+Binary value of 0xa1: 1010 0001
+Valid bit: 1
+Index of page table: 0100001 = 33
+
+Value at 8th index in page 33: 0xb5
+Binary value of 0xb5: 1011 0101
+Valid bit: 1
+Page with value: 110101 = 53
+
+Value at 28th index in page 53: 0x08
+
+Value: 0x08
+
+...
+
+
+3 -> My understanding of cache is that whenever CPU needs something it first looks it up in cache. If it finds it there, it uses it. If not, it looks it up, finds it, fills the cache with it, and then uses it. Given this, memory references are faster with cache because CPU doesn't have to go all the way to memory to get the data.
+In our multi-level page table, the cache will be used to store the most recent page lookups. Compared to a linear page table, the multi-level page table will have more cache misses because the CPU will have to go through multiple levels of page tables to find the data. However, the cache will still help speed up memory references by storing the most frequently accessed pages and reducing the number of times the CPU has to go to memory.
