@@ -1,0 +1,24 @@
+1 -> <Using top command for CPU usage>
+mem quickly rises to the top taking 99 - 100.5% of CPU usage. The fact that it is using more than 100% is due to the fact that it is using multiple cores (I have many many cores).
+The time column shows the time the process has been using CPU for, and it is constantly increasing. Top command showed no User column, so I head to activity monitor to monitor it, and it shows my ueername. Interesting because for top command, in activity moniter, it has root as the user.
+When running multiple instances of mem, the other mem also takes up 99 - 100.5% of CPU usage.
+
+
+2 -> <Using vm_stat command>
+The page size of the system is 16384 bytes. Before running mem, that allocates 1GB of memory, has 11000 free pages. Upon running mem, the number of free pages is reduced to 4000. When killing the process, the number of free pages jumps to 69000 and slowly decreases.
+Yes the number of pages that was freed was expected as it equates to 1GB of memory, which was allocated by mem.
+
+
+3 -> I think I have a good theoritical understanding that I need not to make my machine suffer like that.
+
+
+4 -> I'd assume the process gets blocked when OS is servicing the page fault and the IO gets done. The process will lave the CPU and the usage will drop from the 100% that it was in earlier experiments.
+
+
+5 -> The bigger request will take much longer to complete as it will not only have to service large number of addresses, it will also have to wait for the page faults to be serviced. The smaller request will be faster as it will have less addresses to service and no page faults to be serviced.
+
+
+6 -> Mac doesn't seem to have this option.
+
+
+7 -> Mac doesn't seem to have this option.
