@@ -1,0 +1,47 @@
+1 -> 
+-s 0 -n 10, FIFO:
+Accessing 8 will cause a "Cache" miss. State of Memory: 8
+Accessing 7 will cause a "Cache" miss. State of Memory: 8 7
+Accessing 4 will cause a "Cache" miss. State of Memory: 8 7 4
+Accessing 2 will cause a "Cache" miss. State of Memory: 7 4 2
+Accessing 5 will cause a "Cache" miss. State of Memory: 4 2 5
+Accessing 4 will cause a "Cache" hit. State of Memory: 4 2 5
+Accessing 7 will cause a "Cache" miss. State of Memory: 4 2 7
+Accessing 3 will cause a "Cache" miss. State of Memory: 2 7 3
+Accessing 4 will cause a "Cache" miss. State of Memory: 7 3 4
+Accessing 5 will cause a "Cache" miss. State of Memory: 3 4 5
+
+
+-s 0 -n 10, LRU:
+Accessing 8 will cause a "Cache" miss. State of Memory: 8
+Accessing 7 will cause a "Cache" miss. State of Memory: 8 7
+Accessing 4 will cause a "Cache" miss. State of Memory: 8 7 4
+Accessing 2 will cause a "Cache" miss. State of Memory: 7 4 2
+Accessing 5 will cause a "Cache" miss. State of Memory: 4 2 5
+Accessing 4 will cause a "Cache" hit. State of Memory: 2 5 4
+Accessing 7 will cause a "Cache" miss. State of Memory: 5 4 7
+Accessing 3 will cause a "Cache" miss. State of Memory: 4 7 3
+Accessing 4 will cause a "Cache" hit. State of Memory: 7 3 4
+Accessing 5 will cause a "Cache" miss. State of Memory: 3 4 5
+
+
+- s 0 -n 10, OPT:
+...
+
+
+2 -> Worst-case addresss stream when the cache size is 5:
+
+FIFO: 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...
+
+LRU: 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, ...
+
+MRU: 0, 1, 2, 3, 4, 5, 4, 5, 4, ...
+
+
+3 -> Done! I ran it once, and all of them have the same performance!
+
+
+4 -> LRU does really well. CLOCK doesn't do as good as LRU but is comparable coming within 10 units of LRU.
+
+
+5 -> ...
