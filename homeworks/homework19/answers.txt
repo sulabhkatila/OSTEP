@@ -1,0 +1,38 @@
+1 ->
+1000: -1
+1001: -1
+1002: -1
+(no jump because SF != OF)
+1003: -1
+
+
+2 -> 
+Thread 0:
+1000: 3
+1001: 2
+1002: 2
+(no jump because SF != OF)
+
+1000: 1
+...
+end with -1 in dx
+
+...
+
+The present of multiple threads will not change the calculation because context switch will always keep track of the register values.
+
+There is no race condition in the code because the threads are not sharing any data.
+
+
+3 -> Both threads will start will 3 and will decrement their and their only register value for every instruction to decrement.
+
+
+4 -> Lets assume the initial value in the address was 0, then by third instruction it will be 1 and will stay till the death of the thread.
+
+
+5 -> the initial value in bx is 3. The loop, in each iteration, decrements the value in bx by 1 and the condition for the loop is if "value in bx is not equal to 0". Hence, the loop runs 3 times.
+
+The final value would be 6 for the shared resource.
+
+
+...
