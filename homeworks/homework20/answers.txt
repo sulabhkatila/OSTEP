@@ -1,0 +1,28 @@
+1 -> <Using -fsanitize in clang>
+It gives me the process id, thread id, and the size of the shared data causing the race condition.
+
+It also tells me the name and the location of the shared data causing the race condition. It does not print out any specific line of code.
+
+
+2 -> Removing one of the offending lines of code or adding of locks, both remove the race condition.
+
+
+3 -> The problem with the code is that if the thread 0 locks m1 but is unable to lock m2 because thread 1 has locked m2 and is waiting for m1 to be freed, which, of course, will not be freed unless m2 is freed for thread 0.
+
+
+4 -> No unusual behavior reported-- program executes successfully. However, adding a sleep(1) ensures that we encounter a deadlock, and the program just pauses forever.
+
+
+5 -> This works and will work fine.
+
+
+6 -> Don't do this! it wastes cpu cycles. Do signals instead!
+
+
+7 -> Thread leak reporteds, for not calling join (improper management of thread). 
+
+
+8 -> This is preferred becuase it does not it marks the thread as blocked, which makes the other thread more likely to be run and complete the update. It is correctness and performance, both (correctness because what if the os does not implement a timer).
+
+
+9 -> Thread leaks!
