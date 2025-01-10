@@ -1,0 +1,39 @@
+1 -> Yes.
+
+
+2 -> Yes. While one of the threads have entered the critical section after checking if flag == 0, the flag is set to 1 and upon leaving the section flag is set back to 0 and completes its purpose, 
+
+
+3 -> It's the same-- just has a loop with 3 iterations. Since the thread life time is less than the timer, no context switch happens, and no waiting is to be done.
+
+
+4 -> Picking a i value such that CPU switches right after moving the flag to ax register is going to be bad.
+
+
+5 -> Similiar to last one but without the possibility of failure.
+
+
+6 -> Yes, the code will always work. However, there will be some performance concerns. CPU "waste" will increase with the increase in i and reach its maximum when i is 1 unit less than the total instructions to be run.
+
+
+7 -> Yes, the right thing happens. Other tests like if the values are updated properly after releasing and if the other thread gets to grab the lock after the first thread releases it can be done.
+
+
+8 -> Yes, I can make sense of it. Don't go inside critical section until the next thread to go after us is what it set to be the other thread.
+
+
+9 -> This doesn't work.
+
+
+10 -> Things to consider when selecting values for -P is to not change the threads when in the middle of .acquire, .spin1, or .spin2.
+
+
+11 -> Yes, it matches the code in the chapter. Yes, the threads do spend a descent chunk of CPU cycles just waiting.
+
+
+12 -> More waiting.
+
+
+13 -> In scenarios, where the schedulers schedule a new thread while one is still on critical section and the newly ran thread tries to access the critical section. For eg in -M 2000 -R ax,bx -a bx=0,bx=0 -i 7 yield.s saves 2 instructions compared to test-and-set.s.
+
+14 -> It is very similiar to its brother. One change is that test-and-test-and-set.s calls xchg conservatively, while its brother is open to calling it all the time. Because xchg is a heavier operation this conservatism may cause some memory write savings.
