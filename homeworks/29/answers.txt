@@ -1,0 +1,32 @@
+1 -> Will stick with gettimeofday(). It is accurate within +/- 1 microsecond. The smallest interval it can measure is 1 microsecond.
+
+
+2 -> As the number of threads increase, the total time required for each thread increases.
+
+There are 11 logical cores in my system.
+
+1 (extra) thread = 12000
+2 threads = 35000
+3 threads = 72000
+...
+5 threads = 107000
+...
+8 threads = 160000
+9 threads = 178000
+10 threads = 200000
+11 threads = 221000
+12 threads = 245000
+
+Exceeding the total logical number of logical cores not seem to have any special effect.
+
+
+3 -> The numbers (trend in the growth of numbers) do see some resemblence with the book.
+
+
+4 -> The implementation can be is at ./code/hand-over-hand-linked-list.c. The hand-over will work significantly better when the list has a huge number of elements.
+
+
+5 -> A simple locking strategy for a B-tree would be to lock the root in the beginning of every operation and release it right before returning.
+
+
+6 -> A more creative locking strategy would be to only lock the nodes that may change. Will come back to implement it after reading: https://www.cs.cmu.edu/afs/cs/academic/class/15712-f08/www/lectures/Lehman81lecture.pdf
