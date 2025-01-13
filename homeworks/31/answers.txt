@@ -1,0 +1,9 @@
+1 -> Done! using sem_open.
+
+
+2 -> Done!
+
+
+3 -> Done!
+
+Skipping the rest.
