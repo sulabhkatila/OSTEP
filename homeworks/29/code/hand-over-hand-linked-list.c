@@ -41,22 +41,16 @@ void unlock_node(linkedlistnode *node) {
 }
 
 bool search(linkedlist *list, int val) {
-    lock_node(list->dummy);
-
     linkedlistnode *pointer = list->dummy;
-    lock_node(pointer->next);
     pointer = pointer->next;
-    unlock_node(list->dummy);
 
     while (pointer != NULL) {
         if (pointer->val == val) {
             unlock_node(pointer);
             return true;
         }
-        lock_node(pointer->next);
         linkedlistnode *temp = pointer;
         pointer = pointer->next;
-        unlock_node(temp);
     }
     return false;
 }
