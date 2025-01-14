@@ -1,0 +1,10 @@
+1 -> The output does not change at all.
+
+
+2 -> The code did not deadlock once. 
+
+
+3 -> No deadlocks!
+
+
+Skipping rest of the questions
