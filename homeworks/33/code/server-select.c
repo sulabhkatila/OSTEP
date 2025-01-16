@@ -17,12 +17,12 @@
 #define MAX_REQUEST_SIZE 1024
 #define BACKLOG 10
 
-void *get_address(struct sockaddr *addr_info) {
-    if (addr_info->sa_family == AF_INET) {
-        return &(((struct sockaddr_in *)addr_info)->sin_addr);
-    }
-    return &(((struct sockaddr_in6 *)addr_info)->sin6_addr);
-}
+// void *get_address(struct sockaddr *addr_info) {
+//     if (addr_info->sa_family == AF_INET) {
+//         return &(((struct sockaddr_in *)addr_info)->sin_addr);
+//     }
+//     return &(((struct sockaddr_in6 *)addr_info)->sin6_addr);
+// }
 
 void handle_connection(int listener) {
     int max_fd, i;
@@ -61,8 +61,6 @@ void handle_connection(int listener) {
 
         // Run through the existing connections for data to read
         for (i = 0; i <= max_fd; i++) {
-            printf("in for\n");
-            fflush(stdout);
             if (FD_ISSET(
                     i, &read_fd_set)) {  // This descriptor's state was updated
                 if (i == listener) {
@@ -82,9 +80,8 @@ void handle_connection(int listener) {
                         max_fd = newfd;
                     }
 
-                    inet_ntop(client_addr_info.ss_family,
-                              get_address((struct sockaddr *)&client_addr_info),
-                              client_addr4, INET6_ADDRSTRLEN);
+                    get_address((struct sockaddr *)&client_addr_info,
+                                client_addr4, client_sin_size));
                     printf("Got a new connection in socket %d from: %s\n", i,
                            client_addr4);
                 } else {
