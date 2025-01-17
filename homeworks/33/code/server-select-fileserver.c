@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "http.h"
 #include "networking.h"
 
 void handle_connection(int listener) {
@@ -99,7 +100,7 @@ void handle_connection(int listener) {
                             res);
                         fflush(stdout);
 
-                        send_http_response(i, OK, res, KEEPALIVE);
+                        send_http_response(i, res);
 
                         printf("sent\n");
                     }
