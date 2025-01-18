@@ -28,6 +28,11 @@
 
 #define MAX_CONCURRENT 10
 
+void print_filecbs(struct aiocb *cbs) {
+    printf("aio_fildes: %d\naio_nbytes: %ul\naio_buf: %s\n\n", cbs->aio_fildes,
+           cbs->aio_nbytes, (char *)cbs->aio_buf);
+}
+
 void handle_connection(int listener) {
     int newfd;
 
@@ -48,7 +53,7 @@ void handle_connection(int listener) {
     FD_ZERO(&active_read_set);
     FD_SET(listener, &active_read_set);
 
-    struct aiocb *filecbs[MAX_CONCURRENT];
+    struct aiocb filecbs[MAX_CONCURRENT];
     int client_sockets[MAX_CONCURRENT] = {
         0};  // assume stdins are not to be worried about
 
@@ -134,27 +139,8 @@ void handle_connection(int listener) {
                         continue;
                     }
 
-                    filecbs[filecb_index] = &filecb;
+                    filecbs[filecb_index] = filecb;
                     client_sockets[filecb_index] = i;
-                    // filecb_index = (filecb_index + 1) %
-                    //                (MAX_CONCURRENT);  // assume prior
-                    //                requests
-                    //                                   // will be completed
-
-                    while (aio_error(&filecb) == EINPROGRESS);
-
-                    int ret = aio_return(&filecb);
-                    if (ret < 0) {
-                        perror("aio_return");
-                    }
-
-                    printf("This was read: %s\n",
-                           response_buffers[filecb_index]);
-
-                    if (send_http_response(i, response_buffers[filecb_index]) ==
-                        -1) {
-                        perror("send");
-                    }
                     filecb_index = (filecb_index + 1) %
                                    (MAX_CONCURRENT);  // assume prior requests
                                                       // will be completed
@@ -162,41 +148,43 @@ void handle_connection(int listener) {
             }
 
             // Check if file, asked by client, is read
-            // for (j = 0; j < MAX_CONCURRENT; j++) {
-            //     printf("Checking if read...\n");
-            //     if (client_sockets[j] > 0) {
-            //         int val = aio_error(filecbs[j]);
-            //         if (val == EINPROGRESS) {
-            //             continue;
-            //         }
-            //
-            //         int read = aio_return(filecbs[j]);
-            //         if (val == 0) {
-            //             response_buffers[j][read] =
-            //                 '\0';  // send_http_response
-            //                        // expects null termination
-            //
-            //             printf("The following was read: %s\n",
-            //                    response_buffers[j]);
-            //
-            //             if (send_http_response(i, response_buffers[j]) == -1)
-            //             {
-            //                 perror("send");
-            //             }
-            //         } else {
-            //             perror("aio_error");
-            //         }
-            //         close(filecbs[j]->aio_fildes);
-            //         client_sockets[j] = 0;
-            //         filecbs[j] = NULL;
-            //
-            //         printf("Closing connection in socket %d\n", i);
-            //         close(i);
-            //
-            //         FD_CLR(i, &active_read_set);
-            //         if (i == maxfd) maxfd--;
-            //     }
-            // }
+            print_filecbs(filecbs);
+            for (j = 0; j < MAX_CONCURRENT; j++) {
+                printf("Checking if read...\n");
+                if (client_sockets[j] > 0) {
+                    int val = aio_error(filecbs + j);
+                    print_filecbs(filecbs + j);
+                    if (val == EINPROGRESS) {
+                        continue;
+                    }
+
+                    int read = aio_return(filecbs + j);
+                    printf("Amount read: %d\n", read);
+                    if (val == 0) {
+                        response_buffers[j][read] =
+                            '\0';  // send_http_response
+                                   // expects null termination
+
+                        printf("The following was read: %s\n",
+                               response_buffers[j]);
+
+                        if (send_http_response(i, response_buffers[j]) == -1) {
+                            perror("send");
+                        }
+                    } else {
+                        printf("val: %d\n", val);
+                        perror("aio_error");
+                    }
+                    close(filecbs[j].aio_fildes);
+                    client_sockets[j] = 0;
+
+                    printf("Closing connection in socket %d\n", i);
+                    close(i);
+
+                    FD_CLR(i, &active_read_set);
+                    if (i == maxfd) maxfd--;
+                }
+            }
         }
     }
 }
